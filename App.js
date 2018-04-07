@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
 });
 
-
+// RANDOM HELPFUL REFS
 // class Greeting extends Component {
 //   render() {
 //     return (
