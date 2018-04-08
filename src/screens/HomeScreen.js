@@ -40,6 +40,13 @@ class HomeScreen extends React.Component {
   render(){
     return (
       <View style = {{flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center"}} >
+        <View style = {{width: '100%', height: 40, backgroundColor:"skyblue"}}>
+          <Button
+            title="Events"
+            onPress={() => this.props.navigation.navigate("EventDisplay")}
+          />
+        </View>
+
         <Button
           title="Log Out"
           onPress={()=> this.logOutUser()}

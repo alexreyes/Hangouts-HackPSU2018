@@ -4,8 +4,13 @@ import * as firebase from 'firebase';
 import{ Container, Content, Header, Form, Input, Item, Label} from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import { NavigationActions } from 'react-navigation';
+
+// import screens
 import HomeScreen from "./src/screens/HomeScreen.js";
 import LoginSignUpScreen from "./src/screens/LoginSignUpScreen.js"
+import EventDisplayScreen from "./src/screens/EventDisplayScreen.js";
+
+// import firebase variables
 import Firebase from "./src/firebaseConfig.js";
 
 const RootStack = StackNavigator({
@@ -14,6 +19,9 @@ const RootStack = StackNavigator({
   },
   Home:{
     screen: HomeScreen
+  },
+  EventDisplay:{
+      screen: EventDisplayScreen
   }
 },
 {
