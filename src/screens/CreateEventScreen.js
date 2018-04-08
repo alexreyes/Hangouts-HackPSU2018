@@ -72,7 +72,7 @@ class CreateEventScreen extends React.Component{
 
         <Button
           title="Create..."
-          onPress={this.pushEvent()}
+          onPress={()=>this.pushEvent()}
         />
 
         <Text>{this.state.info}</Text>
