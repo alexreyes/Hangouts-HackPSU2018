@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { AppRegistry, Alert, StyleSheet, Image, TextInput, Text, View } from 'react-native';
+import { AppRegistry, Alert, StyleSheet, Image, TextInput, Text, View, Button } from 'react-native';
 import * as firebase from 'firebase';
-import{ Container, Content, Header, Form, Input, Item, Label, Button} from 'native-base';
+import{ Container, Content, Header, Form, Input, Item, Label} from 'native-base';
 import { StackNavigator } from 'react-navigation';
-import NewPage from './NewPage.js';
+import { NavigationActions } from 'react-navigation';
 import MapView , {PROVIDER_GOOGLE} from 'react-native-maps';
+ 
 const config = {
     apiKey: "AIzaSyBuul15OuC_PfDjE_gcZPtchTW4yviSUM0",
     authDomain: "hangouts-c7705.firebaseapp.com",
@@ -15,6 +16,12 @@ const config = {
 
 const firebaseApp = firebase.initializeApp(config);
 const auth = firebase.auth();
+
+// defining the method that will reset the user to the login screen with no back option
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [NavigationActions.navigate({routeName: 'LoginSignUp'})],
+});
 
 class HomeScreen extends React.Component {
 
@@ -31,46 +38,45 @@ class HomeScreen extends React.Component {
       if (user != null) {
       } else {
         this.setState({ logInStatus: 'You are currently logged out.' });
-        this.props.navigation.navigate('LoginSignUp')
+        this.props.navigation.dispatch(resetAction);
       }
     });
   }
 
   render(){
     return (
-      <View>
-        <Text>Hello</Text>
-        <Button style={{ marginTop:25 }} rounded success
-                onPress={()=> this.logOutUser()}>
-          <Text style={{color:'white', textAlign:'center'}}>Log Out</Text>
-        </Button>
-        <Button style={{ marginTop:25 }} 
-                onPress = {()=> this.prop.navigation.navigate("MapsPage")}>
-              <Text style={{color:'white', textAlign:'center'}}>Maps Page</Text>
-            </Button>
+      <View style = {{flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center"}} >
+        <Button
+          title="Log Out"
+          onPress={()=> this.logOutUser()}
+        />
+        <Button 
+            title = "Maps Page"
+            onPress={() => this.props.navigation.navigate('MapsPage')
+          }
+        />
       </View>
     );
   }
 }
-class MapsPage extends React.Component {
+
+class MapsPage extends Component {
+  static navigationOptions = { title: 'Welcome', headerMode:'MapsPage'};
   render() {
     return (
-      <View>
-        <MapView
-          provider= {PROVIDER_GOOGLE}
-          style = {styles.container}
-          customMapStyle = {Aubergine}
-          initialRegion={{
-            latitude:  39.7392,
-            longitude: -104.9903, 
-            latitudeDelta: 0.0922, 
-            longitudeDelta: 0.0421,
-          }}
-        />
-        </View>
+      <MapView
+        style = {styles.mapsStyle}
+        initialRegion={{
+          latitude: 40.798211,
+          longitude: -77.861141,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
     );
   }
 }
+
 class LoginSignUpScreen extends React.Component {
 
   constructor(props){
@@ -132,17 +138,17 @@ class LoginSignUpScreen extends React.Component {
           </Item>
 
           <View style={{alignSelf:'center'}}>
-            <Button style={{ marginTop:25 }} rounded success
-                    onPress={()=> this.loginUser(this.state.email,this.state.password)}>
-              <Text style={{color:'white', textAlign:'center'}}>Login</Text>
-            </Button>
+            <Button
+              title="Login"
+              onPress={()=> this.loginUser(this.state.email,this.state.password)}
+            />
           </View>
 
           <View style={{alignSelf:'center'}}>
-            <Button style={{ marginTop:25 }} rounded primary
-                    onPress={()=> this.signUpUser(this.state.email,this.state.password)}>
-              <Text style={{color:'white', textAlign:'center'}}>Sign Up</Text>
-            </Button>
+            <Button
+              onPress={()=> this.signUpUser(this.state.email,this.state.password)}
+              title="Sign Up"
+            />
           </View>
         </Form>
       </Container>
@@ -152,13 +158,15 @@ class LoginSignUpScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container:{
-    height: '100%', 
-    width:'100%',
     flex:1,
     backgroundColor: 'white',
     justifyContent: 'center',
     padding: 50
   },
+  mapsStyle: {
+    width:'100%', 
+    height:'100%',
+  }
 });
 
 const RootStack = StackNavigator({
@@ -169,11 +177,15 @@ const RootStack = StackNavigator({
     screen: HomeScreen
   },
   MapsPage:{
-    screen: MapsPage
-  }
-},
+    screen: MapsPage,
+  },
+  },
+  { 
+    headerMode: 'MapsPage' 
+  },
 {
   initialRouteName: 'LoginSignUp'
+  
 });
 
 export default class Main extends React.Component {
