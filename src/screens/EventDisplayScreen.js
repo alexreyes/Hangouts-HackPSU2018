@@ -9,7 +9,9 @@ class EventDisplayScreen extends React.Component{
 
   render(){
     return(
-      <Text>"Hello World"</Text>
+      <View style = {{flex: 1, flexDirection:"column", justifyContent: "center", alignItems:"center"}}>
+        <Text>"Hello World"</Text>
+      </View>
   )
   }
 

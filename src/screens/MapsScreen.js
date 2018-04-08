@@ -3,7 +3,7 @@ import {AppRegistry, StyleSheet, View} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 class MapsScreen extends Component {
-    static navigationOptions = { title: 'Welcome', headerMode:'MapsScreen'};
+    static navigationOptions = { header: null, }
     render() {
       return (
         <MapView
@@ -20,8 +20,8 @@ class MapsScreen extends Component {
   }
 
 const styles = StyleSheet.create({
-    mapsStyle: { 
-        width: '100%', 
+    mapsStyle: {
+        width: '100%',
         height: '100%'
     }
 })

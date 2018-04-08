@@ -39,24 +39,23 @@ class HomeScreen extends React.Component {
 
   render(){
     return (
-      <View style = {{flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center"}} >
-        <View style = {{width: '100%', height: 40, backgroundColor:"skyblue"}}>
-          <Button
-            title="Events"
-            onPress={() => this.props.navigation.navigate("EventDisplay")}
-          />
-        </View>
+      <View style = {{flex: 1, flexDirection: "column", justifyContent: "space-around", alignItems: "center"}} >
+        <Button
+          title="Events"
+          onPress={() => this.props.navigation.navigate("EventDisplay")}
+        />
+
+        <Button
+            title = "Maps Page"
+            onPress={() => this.props.navigation.navigate('MapsScreen')
+          }
+        />
 
         <Button
           title="Log Out"
           onPress={()=> this.logOutUser()}
         />
-        <Button 
-            title = "Maps Page"
-            onPress={() => this.props.navigation.navigate('MapsScreen')
-          }
-        />
-      </View>      
+      </View>
     );
   }
 }
