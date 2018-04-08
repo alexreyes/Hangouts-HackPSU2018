@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Alert, StyleSheet, Image, TextInput, Text, View } from 'react-native';
 import * as firebase from 'firebase';
 import{ Container, Content, Header, Form, Input, Item, Label, Button} from 'native-base';
+import { StackNavigator } from 'react-navigation';
 
 const config = {
     apiKey: "AIzaSyBuul15OuC_PfDjE_gcZPtchTW4yviSUM0",
@@ -12,8 +13,42 @@ const config = {
   };
 
 const firebaseApp = firebase.initializeApp(config);
+const auth = firebase.auth();
 
-export default class Main extends Component {
+class HomeScreen extends React.Component {
+
+  logOutUser = () =>{
+    firebase.auth().signOut().then(function() {
+      console.log('Signed Out');
+    }, function(error) {
+      console.error('Sign Out Error', error);
+    });
+  }
+
+  componentWillMount() {
+    auth.onAuthStateChanged(user => {
+      if (user != null) {
+      } else {
+        this.setState({ logInStatus: 'You are currently logged out.' });
+        this.props.navigation.navigate('LoginSignUp')
+      }
+    });
+  }
+
+  render(){
+    return (
+      <View>
+        <Text>Hello</Text>
+        <Button style={{ marginTop:25 }} rounded success
+                onPress={()=> this.logOutUser()}>
+          <Text style={{color:'white', textAlign:'center'}}>Log Out</Text>
+        </Button>
+      </View>
+    );
+  }
+}
+
+class LoginSignUpScreen extends React.Component {
 
   constructor(props){
     super(props)
@@ -22,6 +57,17 @@ export default class Main extends Component {
       email: '',
       password: ''
     })
+  }
+
+  componentWillMount() {
+    auth.onAuthStateChanged(user => {
+      if (user != null) {
+        this.setState({ logInStatus: 'We are authenticated now!' });
+        this.props.navigation.navigate('Home')
+      } else {
+        this.setState({ logInStatus: 'You are currently logged out.' });
+      }
+    });
   }
 
   signUpUser = (email,password) =>{
@@ -89,6 +135,24 @@ const styles = StyleSheet.create({
     padding: 50
   },
 });
+
+const RootStack = StackNavigator({
+  LoginSignUp:{
+    screen: LoginSignUpScreen
+  },
+  Home:{
+    screen: HomeScreen
+  }
+},
+{
+  initialRouteName: 'LoginSignUp'
+});
+
+export default class Main extends React.Component {
+  render(){
+    return <RootStack />
+  }
+}
 
 // RANDOM HELPFUL REFS
 // class Greeting extends Component {
