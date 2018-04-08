@@ -51,7 +51,12 @@ class HomeScreen extends React.Component {
           title="Log Out"
           onPress={()=> this.logOutUser()}
         />
-      </View>
+        <Button 
+            title = "Maps Page"
+            onPress={() => this.props.navigation.navigate('MapsScreen')
+          }
+        />
+      </View>      
     );
   }
 }

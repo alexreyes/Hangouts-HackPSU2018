@@ -9,6 +9,7 @@ import { NavigationActions } from 'react-navigation';
 import HomeScreen from "./src/screens/HomeScreen.js";
 import LoginSignUpScreen from "./src/screens/LoginSignUpScreen.js"
 import EventDisplayScreen from "./src/screens/EventDisplayScreen.js";
+import MapsScreen from "./src/screens/MapsScreen.js";
 
 // import firebase variables
 import Firebase from "./src/firebaseConfig.js";
@@ -22,10 +23,13 @@ const RootStack = StackNavigator({
   },
   EventDisplay:{
       screen: EventDisplayScreen
-  }
-},
+  },
+  MapsScreen:{
+    screen: MapsScreen,
+  },
 {
   initialRouteName: 'LoginSignUp'
+
 });
 
 export default class Main extends React.Component {
