@@ -16,13 +16,17 @@ const config = {
 const firebaseApp = firebase.initializeApp(config);
 const auth = firebase.auth();
 
-// defining the method that will reset the user to the login screen with no back option
-const resetAction = NavigationActions.reset({
-  index: 0,
-  actions: [NavigationActions.navigate({routeName: 'LoginSignUp'})],
-});
-
 class HomeScreen extends React.Component {
+
+  resetNavigation(targetRoute) {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: targetRoute }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
+  }
 
   logOutUser = () =>{
     firebase.auth().signOut().then(function() {
@@ -37,7 +41,7 @@ class HomeScreen extends React.Component {
       if (user != null) {
       } else {
         this.setState({ logInStatus: 'You are currently logged out.' });
-        this.props.navigation.dispatch(resetAction);
+        this.resetNavigation("LoginSignUp");
       }
     });
   }
@@ -56,6 +60,16 @@ class HomeScreen extends React.Component {
 
 class LoginSignUpScreen extends React.Component {
 
+  resetNavigation(targetRoute) {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: targetRoute }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
+  }
+
   constructor(props){
     super(props)
 
@@ -69,7 +83,7 @@ class LoginSignUpScreen extends React.Component {
     auth.onAuthStateChanged(user => {
       if (user != null) {
         this.setState({ logInStatus: 'We are authenticated now!' });
-        this.props.navigation.navigate('Home')
+        this.resetNavigation("Home");
       } else {
         this.setState({ logInStatus: 'You are currently logged out.' });
       }
