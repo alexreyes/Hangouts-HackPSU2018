@@ -87,14 +87,14 @@ class LoginSignUpScreen extends React.Component {
                     onChangeText={(password)=>this.setState({password})}/>
           </Item>
 
-          <View style={{alignSelf:'center'}}>
+          <View style={{alignSelf:'center', paddingTop:15}}>
             <Button
               title="Login"
               onPress={()=> this.loginUser(this.state.email,this.state.password)}
             />
           </View>
 
-          <View style={{alignSelf:'center'}}>
+          <View style={{alignSelf:'center', paddingTop:15}}>
             <Button
               onPress={()=> this.signUpUser(this.state.email,this.state.password)}
               title="Sign Up"

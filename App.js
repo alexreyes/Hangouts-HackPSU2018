@@ -34,7 +34,6 @@ const RootStack = StackNavigator({
 ,
 {
   initialRouteName: 'LoginSignUp'
-
 });
 
 export default class Main extends React.Component {
