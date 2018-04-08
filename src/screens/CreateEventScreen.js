@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import{ Container, Content, Header, Form, Input, Item, Label} from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import { NavigationActions } from 'react-navigation';
+import Firebase from "../firebaseConfig.js";
 
 class CreateEventScreen extends React.Component{
   static navigationOptions = {title: "Create New Event"}
@@ -24,6 +25,25 @@ class CreateEventScreen extends React.Component{
     this.setState({
       info: this.state.date + this.state.time
     })
+  }
+
+  componentWillMount() {
+    Firebase.init();
+  }
+
+  pushEvent = () =>{
+    firebase.database().ref(firebase.auth().currentUser.uid).set(
+      {
+        date: this.state.date,
+        time: this.state.time,
+        title: this.state.title,
+        location: this.state.location
+      }
+    ).then(() => {
+      console.log('It worked');
+    }).catch((error) => {
+      console.log('NOPE DIDNT WORK');
+    });
   }
 
   render(){
@@ -52,7 +72,7 @@ class CreateEventScreen extends React.Component{
 
         <Button
           title="Create..."
-          onPress={()=> this.createNewEventInDB()}
+          onPress={this.pushEvent()}
         />
 
         <Text>{this.state.info}</Text>
