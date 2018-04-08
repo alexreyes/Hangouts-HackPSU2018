@@ -9,8 +9,22 @@ class EventDisplayScreen extends React.Component{
 
   render(){
     return(
-      <View style = {{flex: 1, flexDirection:"column", justifyContent: "center", alignItems:"center"}}>
-        <Text>"Hello World"</Text>
+      <View style ={{flex:1, flexDirection:"column",justifyContent:"space-between"}}>
+
+        // view area where the event object buttons will go
+        <View style = {{flex: 1, flexDirection:"column", justifyContent:"flex-start", alignItems:"center"}}>
+            <Text>"Hello There everyone!"</Text>
+        </View>
+
+        // renders the create event button
+        <View style = {{alignSelf:"flex-end", backgroundColor:"blue"}}>
+          <Button
+            title="Create Event..."
+            color="white"
+            onPress={() => this.props.navigation.navigate("CreateEvent")}
+          />
+        </View>
+
       </View>
   )
   }

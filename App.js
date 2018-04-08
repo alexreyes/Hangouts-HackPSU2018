@@ -10,6 +10,7 @@ import HomeScreen from "./src/screens/HomeScreen.js";
 import LoginSignUpScreen from "./src/screens/LoginSignUpScreen.js"
 import EventDisplayScreen from "./src/screens/EventDisplayScreen.js";
 import MapsScreen from "./src/screens/MapsScreen.js";
+import CreateEventScreen from "./src/screens/CreateEventScreen.js";
 
 // import firebase variables
 import Firebase from "./src/firebaseConfig.js";
@@ -26,6 +27,9 @@ const RootStack = StackNavigator({
   },
   MapsScreen:{
     screen: MapsScreen,
+  },
+  CreateEvent:{
+    screen: CreateEventScreen,
   }
 },
 {
