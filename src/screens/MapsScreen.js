@@ -11,8 +11,8 @@ class MapsScreen extends Component {
           initialRegion={{
             latitude: 40.798211,
             longitude: -77.861141,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitudeDelta: .001,
+            longitudeDelta: .1,
           }}
         />
       );
