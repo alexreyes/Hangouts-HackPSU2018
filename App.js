@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { AppRegistry, Alert, StyleSheet, Image, TextInput, Text, View } from 'react-native';
+import { AppRegistry, Alert, StyleSheet, Image, TextInput, Text, View, Button } from 'react-native';
 import * as firebase from 'firebase';
-import{ Container, Content, Header, Form, Input, Item, Label, Button} from 'native-base';
+import{ Container, Content, Header, Form, Input, Item, Label} from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import { NavigationActions } from 'react-navigation';
 
@@ -44,12 +44,11 @@ class HomeScreen extends React.Component {
 
   render(){
     return (
-      <View>
-        <Text>Hello</Text>
-        <Button style={{ marginTop:25 }} rounded success
-                onPress={()=> this.logOutUser()}>
-          <Text style={{color:'white', textAlign:'center'}}>Log Out</Text>
-        </Button>
+      <View style = {{flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center"}} >
+        <Button
+          title="Log Out"
+          onPress={()=> this.logOutUser()}
+        />
       </View>
     );
   }
@@ -116,17 +115,17 @@ class LoginSignUpScreen extends React.Component {
           </Item>
 
           <View style={{alignSelf:'center'}}>
-            <Button style={{ marginTop:25 }} rounded success
-                    onPress={()=> this.loginUser(this.state.email,this.state.password)}>
-              <Text style={{color:'white', textAlign:'center'}}>Login</Text>
-            </Button>
+            <Button
+              title="Login"
+              onPress={()=> this.loginUser(this.state.email,this.state.password)}
+            />
           </View>
 
           <View style={{alignSelf:'center'}}>
-            <Button style={{ marginTop:25 }} rounded primary
-                    onPress={()=> this.signUpUser(this.state.email,this.state.password)}>
-              <Text style={{color:'white', textAlign:'center'}}>Sign Up</Text>
-            </Button>
+            <Button
+              onPress={()=> this.signUpUser(this.state.email,this.state.password)}
+              title="Sign Up"
+            />
           </View>
         </Form>
       </Container>
