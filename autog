@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "1 for pull, 2 for push"
+read CHOICE
+
+if [ "$CHOICE" = "1" ]
+then
+	echo "pulling..."
+	git pull origin master
+fi
+
+if [ "$CHOICE" = "2" ]; then
+	git add .
+	git status
+	echo "Continue? (y/n)"
+	read CONT
+	if [ $CONT = "y" ]; then
+		echo "commiting and pushing..."
+		git commit -m "changes"
+		git push origin master
+	fi
+fi
+
+echo "Process Complete"
