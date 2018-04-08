@@ -3,6 +3,7 @@ import { AppRegistry, Alert, StyleSheet, Image, TextInput, Text, View } from 're
 import * as firebase from 'firebase';
 import{ Container, Content, Header, Form, Input, Item, Label, Button} from 'native-base';
 import { StackNavigator } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 
 const config = {
     apiKey: "AIzaSyBuul15OuC_PfDjE_gcZPtchTW4yviSUM0",
@@ -14,6 +15,12 @@ const config = {
 
 const firebaseApp = firebase.initializeApp(config);
 const auth = firebase.auth();
+
+// defining the method that will reset the user to the login screen with no back option
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [NavigationActions.navigate({routeName: 'LoginSignUp'})],
+});
 
 class HomeScreen extends React.Component {
 
@@ -30,7 +37,7 @@ class HomeScreen extends React.Component {
       if (user != null) {
       } else {
         this.setState({ logInStatus: 'You are currently logged out.' });
-        this.props.navigation.navigate('LoginSignUp')
+        this.props.navigation.dispatch(resetAction);
       }
     });
   }
