@@ -39,17 +39,23 @@ class HomeScreen extends React.Component {
 
   render(){
     return (
-      <View style = {{flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center"}} >
+      <View style = {{flex: 1, flexDirection: "column", justifyContent: "space-around", alignItems: "center"}} >
         <Button
-          title="Log Out"
-          onPress={()=> this.logOutUser()}
+          title="Events"
+          onPress={() => this.props.navigation.navigate("EventDisplay")}
         />
-        <Button 
+
+        <Button
             title = "Maps Page"
             onPress={() => this.props.navigation.navigate('MapsScreen')
           }
         />
-      </View>      
+
+        <Button
+          title="Log Out"
+          onPress={()=> this.logOutUser()}
+        />
+      </View>
     );
   }
 }
