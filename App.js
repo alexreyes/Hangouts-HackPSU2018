@@ -26,7 +26,8 @@ const RootStack = StackNavigator({
   },
   MapsScreen:{
     screen: MapsScreen,
-  },
+  }
+},
 {
   initialRouteName: 'LoginSignUp'
 
