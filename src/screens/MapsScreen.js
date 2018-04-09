@@ -5,13 +5,12 @@ import {
   Dimensions,
   StyleSheet,
 } from 'react-native';
-
-import MapView, { Marker, Callout, ProviderPropType } from 'react-native-maps';
+import MapView, {Marker, Callout, ProviderPropType } from 'react-native-maps';
 import flagImg from './flag-blue.png';
 
 const { width, height } = Dimensions.get('window');
 
-const ASPECT_RATIO = width / height;
+const ASPECT_RATIO = width / height
 const LATITUDE = 37.78825;
 const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0922;
@@ -45,15 +44,7 @@ class LoadingMap extends React.Component {
           loadingIndicatorColor="#666666"
           loadingBackgroundColor="#eeeeee"
         >
-          <Marker
-            coordinate={{
-              latitude: LATITUDE + SPACE,
-              longitude: LONGITUDE + SPACE,
-            }}
-            centerOffset={{ x: -18, y: -60 }}
-            anchor={{ x: 0.69, y: 1 }}
-            image={flagImg}
-          />
+
           <Marker
             coordinate={{
               latitude: LATITUDE - SPACE,
@@ -64,7 +55,7 @@ class LoadingMap extends React.Component {
           >
             <Callout>
               <View>
-                <Text>This is a plain view</Text>
+                <Text>Koursi's Location</Text>
               </View>
             </Callout>
           </Marker>

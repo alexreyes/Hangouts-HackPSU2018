@@ -50,7 +50,7 @@ class CreateEventScreen extends React.Component{
     return(
       <View style = {{flex:1 , flexDirection: "column", justifyContent: "flex-start", padding: 10}}>
         // date entry
-        <Item floatingLabel>
+        <Item floatingLabel style = {styles.container}>
           <Label>Date</Label>
           <Input onChangeText={(date)=>this.setState({date})}/>
         </Item>
@@ -85,5 +85,9 @@ class CreateEventScreen extends React.Component{
   }
 
 }
-
+const styles = StyleSheet.create({
+  container: {
+    padding:10,
+  }
+});
 export default CreateEventScreen;
